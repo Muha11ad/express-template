@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { TYPES } from '../types';
 import { DataSource } from 'typeorm';
 import { User } from './model/user.model';
-import { ConfigService, IConfigService } from '../config';
+import { IConfigService } from '../config';
 import { inject, injectable } from 'inversify';
 import { ILogger } from '../logger/logger.interface';
 
