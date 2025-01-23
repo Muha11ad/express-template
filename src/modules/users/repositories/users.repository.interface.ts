@@ -1,13 +1,13 @@
-import { UserModel } from '@prisma/client';
+import { User } from '@/database';
 
 export interface IUsersRepository {
-	create: (user: Omit<UserModel, 'id'>) => Promise<UserModel>;
+	create: (user: Omit<User, 'id'>) => Promise<void>;
 
-	deleteById: (id: number) => Promise<UserModel | null>;
+	deleteById: (id: number) => Promise<void>;
 
-	findByEmail: (email: string) => Promise<UserModel | null>;
+	findByEmail: (email: string) => Promise<void>;
 
-	findById: (id: number) => Promise<UserModel | null>;
+	findById: (id: number) => Promise<void>;
 
-	updateById: (id: number, user: Partial<UserModel>) => Promise<UserModel | null>;
+	updateById: (id: number, user: Partial<User>) => Promise<void>;
 }

@@ -5,5 +5,4 @@ export interface IUserController {
 	deleteUser: (req: Request, res: Response, next: NextFunction) => void;
 	createUser: (req: Request, res: Response, next: NextFunction) => void;
 	updateUser: (req: Request, res: Response, next: NextFunction) => void;
-	logoutUser: (req: Request, res: Response, next: NextFunction) => void;
 }

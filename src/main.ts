@@ -8,10 +8,12 @@ import {
 } from './modules/users';
 import { App } from './app';
 import { TYPES } from './types';
+import { TypeOrmService } from './database';
 import { LoggerService, ILogger } from './logger';
 import { ConfigService, IConfigService } from './config';
 import { ExeptionFilter, IExeptionFilter } from './errors';
 import { Container, ContainerModule, interfaces } from 'inversify';
+
 export interface IBootstrapReturn {
 	appContainer: Container;
 	app: App;
@@ -21,6 +23,7 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
 	bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
+	bind<TypeOrmService>(TYPES.TypeOrmService).to(TypeOrmService).inSingletonScope();
 
 	bind<IUsersRepository>(TYPES.UserRepository).to(UsersRepository).inSingletonScope();
 	bind<IUserController>(TYPES.UserController).to(UserController).inSingletonScope();

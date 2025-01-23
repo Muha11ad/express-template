@@ -3,7 +3,7 @@ export const TYPES = {
 	Application: Symbol.for('Application'),
 	ConfigService: Symbol.for('ConfigService'),
 	ExeptionFilter: Symbol.for('ExeptionFilter'),
-
+	TypeOrmService: Symbol.for('TypeOrmService'),
 	//User
 	UserModel: Symbol.for('UserModel'),
 	UserService: Symbol.for('UserService'),

@@ -1,4 +1,4 @@
-import { IsEmail, IsString, IsNotEmpty, MinLength, IsIn } from 'class-validator';
+import { IsEmail, IsString, IsNotEmpty, MinLength } from 'class-validator';
 
 export class UserRegisterDto {
 	@IsNotEmpty({ message: 'Email обязателень' })
@@ -16,8 +16,4 @@ export class UserRegisterDto {
 	@IsString({ message: 'Не указано фамилия' })
 	@IsNotEmpty({ message: 'Фамилия обязательно' })
 	lastName: string;
-
-	@IsString({ message: 'Не указано роль' })
-	@IsIn(['admin', 'director', 'teamLead', 'teacher', 'master'], { message: 'Недопустимая роль' })
-	role: string;
 }

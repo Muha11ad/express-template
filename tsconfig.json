@@ -18,9 +18,12 @@
 		"strict": true,
 		"strictPropertyInitialization": false,
 		/* Completeness */
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		/* Paths */
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["src/*"]
+		}
 	},
-	"exclude": [
-		"node_modules"
-	]
+	"exclude": ["node_modules"]
 }

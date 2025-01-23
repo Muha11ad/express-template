@@ -10,6 +10,7 @@ import { IExeptionFilter } from './errors';
 import express, { Express } from 'express';
 import { inject, injectable } from 'inversify';
 import { UserController } from './modules/users';
+import { TypeOrmService } from './database/TypeOrmService';
 
 @injectable()
 export class App {
@@ -22,6 +23,7 @@ export class App {
 		@inject(TYPES.ConfigService) private configService: IConfigService,
 		@inject(TYPES.UserController) private userController: UserController,
 		@inject(TYPES.ExeptionFilter) private exeptionFilter: IExeptionFilter,
+		@inject(TYPES.TypeOrmService) private typeOrmService: TypeOrmService,
 	) {
 		this.app = express();
 		this.port = this.configService.get('PORT') || 9000;
@@ -48,6 +50,7 @@ export class App {
 	}
 
 	public async init(): Promise<void> {
+		this.typeOrmService.connect();
 		this.useRoutes();
 		this.useMiddleware();
 		this.useExeptionFilters();
