@@ -1,10 +1,10 @@
-import { TYPES } from '../types';
+import { TYPES } from '@/types';
+import { ILogger } from '@/logger';
 import { inject, injectable } from 'inversify';
-import { ILogger } from '../logger/logger.interface';
 import { config, DotenvConfigOutput, DotenvParseOutput } from 'dotenv';
 
 @injectable()
-export class ConfigService  {
+export class ConfigService {
 	private config: DotenvParseOutput;
 	constructor(@inject(TYPES.ILogger) private logger: ILogger) {
 		const result: DotenvConfigOutput = config();

@@ -1,6 +1,5 @@
 import 'reflect-metadata';
 import { TYPES } from '@/types';
-import { sign } from 'jsonwebtoken';
 import { ILogger } from '@/logger';
 import { IUserService } from '../index';
 import { ConfigService } from '@/config';
@@ -15,7 +14,6 @@ export class UserController extends BaseController implements IUserController {
 	private readonly secret4Token: string;
 	constructor(
 		@inject(TYPES.ILogger) private loggerService: ILogger,
-		@inject(TYPES.UserService) private userService: IUserService,
 		@inject(TYPES.ConfigService) private configService: ConfigService,
 	) {
 		super(loggerService);
@@ -50,36 +48,9 @@ export class UserController extends BaseController implements IUserController {
 		]);
 	}
 
-	async login(
-		req: Request<{}, {}, UserLoginDto>,
-		res: Response,
-		next: NextFunction,
-	): Promise<void> {}
-
 	async deleteUser(req: Request, res: Response, next: NextFunction): Promise<void> {}
 
 	async createUser(req: Request, res: Response, next: NextFunction): Promise<void> {}
 
 	async updateUser(req: Request, res: Response, next: NextFunction): Promise<void> {}
-
-	private signJWT(email: string, secret: string): Promise<string> {
-		return new Promise<string>((resolve, reject) => {
-			sign(
-				{
-					email,
-					iat: Math.floor(Date.now() / 1000),
-				},
-				secret,
-				{
-					algorithm: 'HS256',
-				},
-				(err, token) => {
-					if (err) {
-						reject(err);
-					}
-					resolve(token as string);
-				},
-			);
-		});
-	}
 }

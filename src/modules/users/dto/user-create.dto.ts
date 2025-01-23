@@ -1,6 +1,6 @@
 import { IsEmail, IsString, IsNotEmpty, MinLength } from 'class-validator';
 
-export class UserRegisterDto {
+export class UserCreateDto {
 	@IsNotEmpty({ message: 'Email обязателень' })
 	@IsEmail({}, { message: 'Неверно указан email' })
 	email: string;
@@ -12,8 +12,4 @@ export class UserRegisterDto {
 	@IsString({ message: 'Не указано имя' })
 	@IsNotEmpty({ message: 'Имя обязательно' })
 	name: string;
-
-	@IsString({ message: 'Не указано фамилия' })
-	@IsNotEmpty({ message: 'Фамилия обязательно' })
-	lastName: string;
 }

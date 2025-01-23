@@ -5,12 +5,12 @@ import { TYPES } from './types';
 import { json } from 'body-parser';
 import { ILogger } from './logger';
 import cookieParser from 'cookie-parser';
-import { IConfigService } from './config';
 import { IExeptionFilter } from './errors';
 import express, { Express } from 'express';
+import { TypeOrmService } from './database';
 import { inject, injectable } from 'inversify';
 import { UserController } from './modules/users';
-import { TypeOrmService } from './database/TypeOrmService';
+import { getCorsOptions, IConfigService } from './config';
 
 @injectable()
 export class App {
@@ -30,15 +30,9 @@ export class App {
 	}
 
 	useMiddleware(): void {
-		this.app.use(
-			cors({
-				origin: ['http://localhost:5173'],
-				methods: ['GET', 'POST', 'PUT', 'DELETE'],
-				credentials: true,
-			}),
-		);
-		this.app.use(json({ limit: '300mb' }));
+		this.app.use(json());
 		this.app.use(cookieParser());
+		this.app.use(cors(getCorsOptions()));
 	}
 
 	useRoutes(): void {

@@ -1,13 +1,12 @@
 import { User } from '@/database';
+import { UserCreateDto, UserUpdateDto } from '../dto';
 
 export interface IUsersRepository {
-	create: (user: Omit<User, 'id'>) => Promise<void>;
+	findAll: () => Promise<User[]>;
+	findById: (id: number) => Promise<User | null>;
+	findByEmail: (email: string) => Promise<User | null>;
 
-	deleteById: (id: number) => Promise<void>;
-
-	findByEmail: (email: string) => Promise<void>;
-
-	findById: (id: number) => Promise<void>;
-
-	updateById: (id: number, user: Partial<User>) => Promise<void>;
+	delete: (id: number) => Promise<string>;
+	create: (data: UserCreateDto) => Promise<User>;
+	update: (id: number, user: UserUpdateDto) => Promise<string>;
 }

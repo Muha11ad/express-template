@@ -1,18 +1,16 @@
-import { IsEmail, IsString } from 'class-validator';
+import { IsEmail, IsString, MinLength, IsOptional } from 'class-validator';
 
 export class UserUpdateDto {
-	@IsEmail({}, { message: 'Неверно указан email' })
+	@IsOptional()
+	@IsEmail()
 	email: string;
 
-	@IsString({ message: 'Не указан пароль' })
+	@IsString()
+	@IsOptional()
+	@MinLength(6)
 	password: string;
 
-	@IsString({ message: 'Не указано имя' })
+	@IsOptional()
+	@IsString()
 	name: string;
-
-	@IsString({ message: 'Не указано фамилия' })
-	lastName: string;
-
-	@IsString({ message: 'Не указано роль' })
-	role: string;
 }

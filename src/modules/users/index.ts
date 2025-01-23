@@ -5,7 +5,7 @@ export { IUserController } from './controllers/users.controller.interface';
 // dto
 export { UserLoginDto } from './dto/user-login.dto';
 export { UserUpdateDto } from './dto/user-update.dto';
-export { UserRegisterDto } from './dto/user-register.dto';
+export { UserCreateDto } from './dto/user-create.dto';
 // models
 export { User } from './models/user.entity';
 
