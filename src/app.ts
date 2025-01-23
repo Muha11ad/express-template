@@ -6,7 +6,7 @@ import { json } from 'body-parser';
 import { ILogger } from './logger';
 import cookieParser from 'cookie-parser';
 import { IExeptionFilter } from './errors';
-import express, { Express } from 'express';
+import express, { Express, urlencoded } from 'express';
 import { TypeOrmService } from './database';
 import { inject, injectable } from 'inversify';
 import { UserController } from './modules/users';
@@ -32,6 +32,7 @@ export class App {
 	useMiddleware(): void {
 		this.app.use(json());
 		this.app.use(cookieParser());
+		this.app.use(urlencoded()); // Add this line
 		this.app.use(cors(getCorsOptions()));
 	}
 

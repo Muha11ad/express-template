@@ -12,8 +12,16 @@ export const USER_HTTP_MESSAGES = {
 	error_deleting: 'Failed to delete user',
 	error_fetching: 'Failed to fetch users',
 	error_validating: 'Failed to validate user',
+	success_deleted: 'User deleted successfully',
+	success_updated: 'User updated successfully',
 	error_email_exists: 'Email already exists',
 	error_fetching_id: 'Error fetching user by ID',
 };
 
-export const USER_SERVICE = {};
+export const USER_ENDPOINTS = {
+	getAll: '/',
+	create: '/',
+	login: '/login',
+	delete: '/delete/:id',
+	update: '/update/:id',
+};

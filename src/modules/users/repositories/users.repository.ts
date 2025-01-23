@@ -5,7 +5,7 @@ import { inject, injectable } from 'inversify';
 import { TypeOrmService, User } from '@/database';
 import { UserCreateDto, UserUpdateDto } from '../dto';
 import { IUsersRepository } from './users.repository.interface';
-import { USER_HTTP_MESSAGES, USER_REPOSITORY } from '../consts';
+import { USER_HTTP_MESSAGES, USER_REPOSITORY } from '../user.consts';
 
 @injectable()
 export class UsersRepository implements IUsersRepository {
