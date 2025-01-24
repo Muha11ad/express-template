@@ -4,7 +4,8 @@ export const USER_REPOSITORY = {
 };
 
 export const USER_HTTP_MESSAGES = {
-	invalid_email: 'Invalid email',
+	not_found: 'User not found',
+	not_found_email: 'Email not found',
 	invalid_password: 'Invalid password',
 	email_exists: 'Email already exists',
 	error_creating: 'Failed to create user',
@@ -15,13 +16,12 @@ export const USER_HTTP_MESSAGES = {
 	success_deleted: 'User deleted successfully',
 	success_updated: 'User updated successfully',
 	error_email_exists: 'Email already exists',
-	error_fetching_id: 'Error fetching user by ID',
 };
 
 export const USER_ENDPOINTS = {
 	getAll: '/',
 	create: '/',
 	login: '/login',
-	delete: '/delete/:id',
-	update: '/update/:id',
+	delete: '/:id',
+	update: '/:id',
 };

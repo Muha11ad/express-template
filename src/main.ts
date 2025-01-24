@@ -25,8 +25,8 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 	bind<TypeOrmService>(TYPES.TypeOrmService).to(TypeOrmService).inSingletonScope();
 
-	bind<IUsersRepository>(TYPES.UserRepository).to(UsersRepository).inSingletonScope();
-	bind<IUserController>(TYPES.UserController).to(UserController).inSingletonScope();
+	bind<IUsersRepository>(TYPES.UserRepository).to(UsersRepository);
+	bind<IUserController>(TYPES.UserController).to(UserController);
 	bind<IUserService>(TYPES.UserService).to(UserService);
 
 	bind<App>(TYPES.Application).to(App);

@@ -1,13 +1,13 @@
-import 'reflect-metadata';
 import cors from 'cors';
+import 'reflect-metadata';
 import { Server } from 'http';
 import { TYPES } from './types';
-import { json } from 'body-parser';
 import { ILogger } from './logger';
 import cookieParser from 'cookie-parser';
 import { IExeptionFilter } from './errors';
-import express, { Express, urlencoded } from 'express';
+import express, { Express } from 'express';
 import { TypeOrmService } from './database';
+import { json, urlencoded } from 'body-parser';
 import { inject, injectable } from 'inversify';
 import { UserController } from './modules/users';
 import { getCorsOptions, IConfigService } from './config';
@@ -31,8 +31,8 @@ export class App {
 
 	useMiddleware(): void {
 		this.app.use(json());
+		this.app.use(urlencoded({ extended: true }));
 		this.app.use(cookieParser());
-		this.app.use(urlencoded()); // Add this line
 		this.app.use(cors(getCorsOptions()));
 	}
 
@@ -45,9 +45,9 @@ export class App {
 	}
 
 	public async init(): Promise<void> {
+		this.useMiddleware();
 		this.typeOrmService.connect();
 		this.useRoutes();
-		this.useMiddleware();
 		this.useExeptionFilters();
 		this.server = this.app.listen(this.port);
 		this.logger.log(`Сервер запущен на http://localhost:${this.port}`);

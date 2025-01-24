@@ -39,6 +39,7 @@ export class UserController extends BaseController implements IUserController {
 				path: USER_ENDPOINTS.create,
 				method: 'post',
 				func: this.create,
+				middlewares: [new ValidateMiddleware(UserCreateDto)],
 			},
 
 			{
@@ -54,55 +55,50 @@ export class UserController extends BaseController implements IUserController {
 			},
 		]);
 	}
-	async login(req: Request, res: Response): Promise<void> {
+	async login(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
 			const token = await this.userService.validateUser(req.body);
 			this.ok(res, token);
 		} catch (error) {
-			this.loggerService.error(error);
-			throw new HTTPError(500, USER_HTTP_MESSAGES.error_validating);
+			next(error);
 		}
 	}
 
-	async delete(req: Request, res: Response): Promise<void> {
+	async delete(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
 			const id = req.params.id;
 			await this.userService.deleteUser(Number(id));
 			this.ok(res, USER_HTTP_MESSAGES.success_deleted);
 		} catch (error) {
-			this.loggerService.error(error);
-			throw new HTTPError(500, USER_HTTP_MESSAGES.error_deleting);
+			next(error);
 		}
 	}
 
-	async create(req: Request, res: Response): Promise<void> {
+	async create(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
-			console.log(req.body);
 			const user = await this.userService.createUser(req.body);
 			this.ok(res, user);
 		} catch (error) {
-			this.loggerService.error(error);
-			throw new HTTPError(500, USER_HTTP_MESSAGES.error_creating);
+			next(error);
 		}
 	}
 
-	async update(req: Request, res: Response): Promise<void> {
+	async update(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
 			const id = req.params.id;
 			const user = await this.userService.updateUser(Number(id), req.body);
 			this.ok(res, user);
 		} catch (error) {
-			this.loggerService.error(error);
-			throw new HTTPError(500, USER_HTTP_MESSAGES.success_updated);
+			next(error);
 		}
 	}
-	async getAll(req: Request, res: Response): Promise<void> {
+	
+	async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
 			const users = await this.userService.findAllUsers();
 			this.ok(res, users);
 		} catch (error) {
-			this.loggerService.error(error);
-			throw new HTTPError(500, USER_HTTP_MESSAGES.error_fetching);
+			next(error);
 		}
 	}
 }
