@@ -9,9 +9,9 @@ export class ConfigService {
 	constructor(@inject(TYPES.ILogger) private logger: ILogger) {
 		const result: DotenvConfigOutput = config();
 		if (result.error) {
-			this.logger.error('[ConfigService] Не удалось прочитать файл .env или он отсутствует');
+			this.logger.error('[ConfigService] Cannot load .env configuration', result.error);
 		} else {
-			this.logger.log('[ConfigService] Конфигурация .env загружена');
+			this.logger.log('[ConfigService] Configuration loaded');
 			this.config = result.parsed as DotenvParseOutput;
 		}
 	}

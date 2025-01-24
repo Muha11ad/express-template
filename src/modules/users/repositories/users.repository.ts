@@ -1,5 +1,4 @@
 import { TYPES } from '@/types';
-import { ILogger } from '@/logger';
 import { inject, injectable } from 'inversify';
 import { USER_REPOSITORY } from '../user.consts';
 import { TypeOrmService, User } from '@/database';

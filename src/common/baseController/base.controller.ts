@@ -27,7 +27,7 @@ export abstract class BaseController {
 	}
 
 	public ok<T>(res: Response, message: T): ExpressReturnType {
-		return this.send<T>(res, 200, message, true); // success is true by default here
+		return this.send<T>(res, 200, message, true);
 	}
 	public created(res: Response): ExpressReturnType {
 		return res.sendStatus(201);

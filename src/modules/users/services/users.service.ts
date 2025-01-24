@@ -5,9 +5,10 @@ import { HTTPError } from '@/errors';
 import { ConfigService } from '@/config';
 import { compare, hash } from 'bcryptjs';
 import { inject, injectable } from 'inversify';
+import { IUsersRepository } from '../repositories';
 import { USER_HTTP_MESSAGES } from '../user.consts';
 import { IUserService } from './users.service.interface';
-import { IUsersRepository, UserCreateDto, UserLoginDto, UserUpdateDto } from '../index';
+import { UserCreateDto, UserLoginDto, UserUpdateDto } from '../dto';
 
 @injectable()
 export class UserService implements IUserService {

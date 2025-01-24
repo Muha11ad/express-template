@@ -1,0 +1,1 @@
+export {IControllerRoute} from "./route.interface"

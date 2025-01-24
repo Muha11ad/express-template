@@ -9,8 +9,8 @@ import express, { Express } from 'express';
 import { TypeOrmService } from './database';
 import { json, urlencoded } from 'body-parser';
 import { inject, injectable } from 'inversify';
-import { UserController } from './modules/users';
 import { getCorsOptions, IConfigService } from './config';
+import { UserController } from './modules/users/controllers';
 
 @injectable()
 export class App {
@@ -50,6 +50,6 @@ export class App {
 		this.useRoutes();
 		this.useExeptionFilters();
 		this.server = this.app.listen(this.port);
-		this.logger.log(`Сервер запущен на http://localhost:${this.port}`);
+		this.logger.log(`Server is running : http://localhost:${this.port}`);
 	}
 }

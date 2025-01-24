@@ -1,5 +1,5 @@
 import { User } from '@/database';
-import { UserCreateDto, UserLoginDto, UserUpdateDto } from '../index';
+import { UserCreateDto, UserLoginDto, UserUpdateDto } from '../dto';
 
 export interface IUserService {
 	findAllUsers: () => Promise<User[]>;

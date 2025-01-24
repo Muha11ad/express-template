@@ -1,15 +1,16 @@
 import 'reflect-metadata';
 import { TYPES } from '@/types';
 import { ILogger } from '@/logger';
-import { HTTPError } from '@/errors';
 import { ConfigService } from '@/config';
+import { IUserService } from '../services';
 import { injectable, inject } from 'inversify';
 import { UserLoginDto } from '../dto/user-login.dto';
+import { UserCreateDto, UserUpdateDto } from '../dto';
+import { BaseController } from '@/common/baseController';
 import { NextFunction, Request, Response } from 'express';
-import { BaseController, ValidateMiddleware } from '@/common';
+import { ValidateMiddleware } from '@/common/middlewares';
 import { IUserController } from './users.controller.interface';
 import { USER_ENDPOINTS, USER_HTTP_MESSAGES } from '../user.consts';
-import { IUserService, UserCreateDto, UserUpdateDto } from '../index';
 
 @injectable()
 export class UserController extends BaseController implements IUserController {
@@ -76,8 +77,8 @@ export class UserController extends BaseController implements IUserController {
 
 	async create(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
-			const user = await this.userService.createUser(req.body);
-			this.ok(res, user);
+			await this.userService.createUser(req.body);
+			this.created(res);
 		} catch (error) {
 			next(error);
 		}
@@ -92,7 +93,7 @@ export class UserController extends BaseController implements IUserController {
 			next(error);
 		}
 	}
-	
+
 	async getAll(req: Request, res: Response, next: NextFunction): Promise<void> {
 		try {
 			const users = await this.userService.findAllUsers();

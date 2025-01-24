@@ -1,11 +1,3 @@
-import {
-	UserService,
-	IUserService,
-	UserController,
-	IUserController,
-	UsersRepository,
-	IUsersRepository,
-} from './modules/users';
 import { App } from './app';
 import { TYPES } from './types';
 import { TypeOrmService } from './database';
@@ -13,6 +5,9 @@ import { LoggerService, ILogger } from './logger';
 import { ConfigService, IConfigService } from './config';
 import { ExeptionFilter, IExeptionFilter } from './errors';
 import { Container, ContainerModule, interfaces } from 'inversify';
+import { IUserService, UserService } from './modules/users/services';
+import { IUserController, UserController } from './modules/users/controllers';
+import { IUsersRepository, UsersRepository } from './modules/users/repositories';
 
 export interface IBootstrapReturn {
 	appContainer: Container;
